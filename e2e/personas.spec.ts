@@ -51,4 +51,16 @@ test.describe("Anchor persona dashboards", () => {
     await page.getByRole("link", { name: "Support Manager" }).click();
     await expect(page).toHaveURL(/\/manager$/);
   });
+
+  test("unknown persona route returns 404 without axe violations", async ({ page }) => {
+    const response = await page.goto("/abc");
+    expect(response?.status()).toBe(404);
+
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Persona not found/i }),
+    ).toBeVisible();
+
+    const results = await new AxeBuilder({ page }).analyze();
+    expect(results.violations).toEqual([]);
+  });
 });
