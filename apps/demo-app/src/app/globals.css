@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Tailwind v4 does not traverse upward into sibling workspace packages automatically.
+   Point @source at @anchor/renderer so utility classes used in its components are generated. */
+@source "../../../../packages/renderer/src";
+
+body {
+  background-color: #f8fafc;
+  color: #020617;
+}

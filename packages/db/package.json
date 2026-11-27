@@ -1,0 +1,25 @@
+{
+  "name": "@anchor/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@anchor/spec": "workspace:*",
+    "@prisma/client": "7.10.1"
+  },
+  "scripts": {
+    "db:generate": "prisma generate --no-hints",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "prisma": "7.10.1",
+    "vitest": "5.1.2"
+  }
+}

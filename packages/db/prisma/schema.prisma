@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Tenant {
+  id    String    @id @default(cuid())
+  name  String
+  users EndUser[]
+}
+
+model EndUser {
+  id       String   @id @default(cuid())
+  tenantId String
+  tenant   Tenant   @relation(fields: [tenantId], references: [id])
+  persona  String   // novice | senior | manager
+  specs    UiSpec[]
+  pins     Pin[]
+}
+
+model UiSpec {
+  id            String       @id @default(cuid())
+  endUserId     String
+  endUser       EndUser      @relation(fields: [endUserId], references: [id])
+  taskKey       String
+  version       Int
+  parentVersion Int?
+  spec          Json
+  status        String       // candidate | live | rejected | reverted
+  createdAt     DateTime     @default(now())
+  adaptation    Adaptation?
+  gateResults   GateResult[]
+
+  @@unique([endUserId, taskKey, version])
+}
+
+model Adaptation {
+  id          String @id @default(cuid())
+  specId      String @unique
+  spec        UiSpec @relation(fields: [specId], references: [id])
+  trigger     String // session_start | frustration | user_request
+  decisionLog Json
+  churn       Float
+}
+
+model GateResult {
+  id      String  @id @default(cuid())
+  specId  String
+  spec    UiSpec  @relation(fields: [specId], references: [id])
+  gate    String  // schema | a11y | stability | policy
+  passed  Boolean
+  details Json
+}
+
+model Pin {
+  id        String  @id @default(cuid())
+  endUserId String
+  endUser   EndUser @relation(fields: [endUserId], references: [id])
+  nodeId    String
+
+  @@unique([endUserId, nodeId])
+}

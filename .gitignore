@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+dist
+build
+coverage
+.env
+.env*.local
+playwright-report
+test-results
+packages/db/src/generated
+apps/demo-app/next-env.d.ts

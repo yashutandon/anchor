@@ -1,0 +1,21 @@
+export { getPrismaClient, type DbClient } from "./client";
+export {
+  createUiSpec,
+  getLatestLiveSpec,
+  listPinsForUser,
+  parseSpecColumn,
+  recordAdaptation,
+  recordGateResults,
+  removePin,
+  updateUiSpecStatus,
+  upsertPin,
+  type AdaptationTrigger,
+  type CreateUiSpecInput,
+  type GateName,
+  type Persona,
+  type PinRecord,
+  type RecordAdaptationInput,
+  type RecordGateResultInput,
+  type StoredUiSpecRecord,
+  type UiSpecStatus,
+} from "./repositories";
