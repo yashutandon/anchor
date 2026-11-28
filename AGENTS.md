@@ -1,3 +1,5 @@
+Read system.md completely before every task; it contains the operating rules for this repo.
+
 # Project: Anchor
 
 A stability + accessibility layer for AI-generated (dynamic) UIs. An LLM proposes

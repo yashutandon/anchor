@@ -4,9 +4,13 @@ out
 dist
 build
 coverage
-.env
-.env*.local
+.env*
+!.env.example
 playwright-report
 test-results
 packages/db/src/generated
 apps/demo-app/next-env.d.ts
+.agents
+.claude
+.windsurf
+skills-lock.json
